@@ -31,7 +31,7 @@ def scrape(url, filename):
         content_element = div.find_all('div', recursive=False)[-1]
 
         title_text = title_element.get_text(strip=True) if title_element else ''
-        italic_text = italic_element.get_text(strip=True) if italic_element else ''
+        italic_text = italic_element.get_text(' ', strip=True) if italic_element else ''
         enunciation_text = enunciation_element.get_text(strip=True)if enunciation_element else ''
         chorus_text = chorus_element.get_text(strip=True) if chorus_element else ''
 
