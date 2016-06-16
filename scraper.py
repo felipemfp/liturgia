@@ -1,8 +1,15 @@
 import datetime
 import requests
+import subprocess
 from bs4 import BeautifulSoup
 
 URL_TEMPLATE = 'http://liturgiadiaria.cnbb.org.br/app/user/user/UserView.php?ano={}&mes={}&dia={}'
+
+def commit_and_push(filename):
+    subprocess.run(['git', 'add', '.'])
+    subprocess.run(['git', 'commit', '-am', ':space_invader: Add {}'.format(filename)])
+    subprocess.run(['git', 'push', 'origin', 'master'])
+
 
 if __name__ == '__main__':
     now = datetime.datetime.now()
@@ -38,3 +45,5 @@ if __name__ == '__main__':
         if chorus_text: mdfile.write('`{}`\n\n'.format(chorus_text))
         mdfile.write('{}\n\n'.format(content_text))
     mdfile.write('Veja mais no [Liturgia Diário - CNBB]({})'.format(url))
+    mdfile.close()
+    commit_and_push(filename)
