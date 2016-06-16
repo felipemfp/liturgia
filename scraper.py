@@ -1,20 +1,22 @@
+import time
 import datetime
 import requests
 import subprocess
+import os.path
 from bs4 import BeautifulSoup
 
 URL_TEMPLATE = 'http://liturgiadiaria.cnbb.org.br/app/user/user/UserView.php?ano={}&mes={}&dia={}'
+SLEEP_TIME = 24 * 60 * 60
+
+def pull():
+    subprocess.run(['git', 'pull', 'origin', 'master', '--rebase'])
 
 def commit_and_push(filename):
     subprocess.run(['git', 'add', '.'])
     subprocess.run(['git', 'commit', '-am', ':space_invader: Add {}'.format(filename)])
     subprocess.run(['git', 'push', 'origin', 'master'])
 
-
-if __name__ == '__main__':
-    now = datetime.datetime.now()
-    url = URL_TEMPLATE.format(now.year, now.month, now.day)
-    filename = '{:4d}-{:02d}-{:02d}.md'.format(now.year, now.month, now.day)
+def scrape(url, filename):
     mdfile = open(filename, mode='w', encoding='utf8')
     request = requests.get(url)
     soup = BeautifulSoup(request.text, 'html.parser')
@@ -46,4 +48,18 @@ if __name__ == '__main__':
         mdfile.write('{}\n\n'.format(content_text))
     mdfile.write('Veja mais no [Liturgia Diário - CNBB]({})'.format(url))
     mdfile.close()
-    commit_and_push(filename)
+
+if __name__ == '__main__':
+    while True:
+        pull()
+        now = datetime.datetime.now()
+        url = URL_TEMPLATE.format(now.year, now.month, now.day)
+        filename = '{:4d}-{:02d}-{:02d}.md'.format(now.year, now.month, now.day)
+        print('Today\'s URL: {}'.format(url))
+        print('Today\'s filename: {}'.format(filename))
+        if not os.path.isfile(filename):
+            scrape(url, filename)
+            commit_and_push(filename)
+        else:
+            print('Today was already scraped.')
+        time.sleep(SLEEP_TIME)
