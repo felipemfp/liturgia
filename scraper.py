@@ -13,7 +13,7 @@ def pull():
 
 def commit_and_push(filename):
     subprocess.run(['git', 'add', '.'])
-    subprocess.run(['git', 'commit', '-am', ':space_invader: Add {}'.format(filename)])
+    subprocess.run(['git', 'commit', '-am', ':church: Add {}'.format(filename)])
     subprocess.run(['git', 'push', 'origin', 'master'])
 
 def scrape(url, filename):
