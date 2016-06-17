@@ -46,7 +46,7 @@ def scrape(url, filename):
         if enunciation_text: mdfile.write('**{}**\n\n'.format(enunciation_text))
         if chorus_text: mdfile.write('`{}`\n\n'.format(chorus_text))
         mdfile.write('{}\n\n'.format(content_text))
-    mdfile.write('Veja mais no [Liturgia Diário - CNBB]({})'.format(url))
+    mdfile.write('Veja mais no [Liturgia Diária - CNBB]({})'.format(url))
     mdfile.close()
 
 if __name__ == '__main__':
