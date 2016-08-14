@@ -9,12 +9,12 @@ URL_TEMPLATE = 'http://liturgiadiaria.cnbb.org.br/app/user/user/UserView.php?ano
 SLEEP_TIME = 24 * 60 * 60
 
 def pull():
-    subprocess.run(['git', 'pull', 'origin', 'master', '--rebase'])
+    subprocess.call(['git', 'pull', 'origin', 'master', '--rebase'])
 
 def commit_and_push(filename):
-    subprocess.run(['git', 'add', '.'])
-    subprocess.run(['git', 'commit', '-am', ':church: Add {}'.format(filename)])
-    subprocess.run(['git', 'push', 'origin', 'master'])
+    subprocess.call(['git', 'add', '.'])
+    subprocess.call(['git', 'commit', '-am', ':church: Add {}'.format(filename)])
+    subprocess.call(['git', 'push', 'origin', 'master'])
 
 def scrape(url, filename):
     mdfile = open(filename, mode='w', encoding='utf8')
