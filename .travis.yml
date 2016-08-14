@@ -1,0 +1,10 @@
+language: python
+
+python: 3.4
+
+install:
+  - pip install requests
+  - pip install beautifulsoup4
+
+script:
+  - python scraper.py
