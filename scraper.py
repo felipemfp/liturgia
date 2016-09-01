@@ -4,7 +4,7 @@ import time
 import datetime
 import requests
 import subprocess
-from os import path
+from os import path, mkdir
 from bs4 import BeautifulSoup
 
 URL_HOST = 'http://liturgiadiaria.cnbb.org.br'
@@ -83,6 +83,8 @@ if __name__ == '__main__':
                 now.year, now.month, now.day)
             print('Today\'s URL: {}'.format(url))
             print('Today\'s filename: {}'.format(filename))
+            if not path.exists(folder):
+                mkdir(folder)
             if not path.isfile(path.join(folder, filename)):
                 scrape(url, folder, filename)
                 commit_and_push(filename)
