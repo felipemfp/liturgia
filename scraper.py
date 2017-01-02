@@ -84,6 +84,7 @@ if __name__ == '__main__':
             print('Today\'s URL: {}'.format(url))
             print('Today\'s filename: {}'.format(filename))
             if not path.exists(folder):
+                mkdir(folder.split('/')[0])
                 mkdir(folder)
             if not path.isfile(path.join(folder, filename)):
                 scrape(url, folder, filename)
