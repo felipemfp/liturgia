@@ -4,7 +4,7 @@ import time
 import datetime
 import requests
 import subprocess
-from os import path, mkdir
+from os import path, mkdir, chdir
 from bs4 import BeautifulSoup
 
 URL_HOST = 'http://liturgiadiaria.cnbb.org.br'
@@ -74,6 +74,7 @@ def scrape(url, folder, filename):
     mdfile.close()
 
 if __name__ == '__main__':
+    chdir(path.dirname(path.abspath(__file__)))
     while True:
         if pull() == 0:
             now = datetime.datetime.now()
