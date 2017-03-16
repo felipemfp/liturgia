@@ -88,7 +88,8 @@ if __name__ == '__main__':
                 mkdir(folder[:4])
             if not path.exists(folder):
                 mkdir(folder)
-            if not path.isfile(path.join(folder, filename)):
+            path_to_file = path.join(folder, filename)
+            if not (path.isfile(path_to_file) and path.getsize(path_to_file) > 0):
                 scrape(url, folder, filename)
                 commit_and_push(filename)
             else:
