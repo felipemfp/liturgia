@@ -2,6 +2,8 @@
 
 :church: :open_book: We scrape the [Liturgia Diária - CNBB](http://liturgiadiaria.cnbb.org.br/) and push a markdown everyday.
 
+**Deactivated on July 13th, 2017**.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
